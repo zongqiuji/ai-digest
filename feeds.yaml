@@ -12,21 +12,8 @@ feeds:
     url: "https://www.technologyreview.com/feed/"
   - name: Wired
     url: "https://www.wired.com/feed/rss"
-  - name: 腾讯科技
-    url: "https://feeds.qq.com/rss/tech/index.xml"
-  - name: 虎嗅网
-    url: "https://www.huxiu.com/rss"
-  - name: 新华社
-    url: "https://www.xinhuanet.com/sitemap/index.htm"
-  - name: 人民日报
-    url: "https://rss.people.com.cn/rmrb/gb/rss.xml"
   - name: 36氪
-    url: "https://www.36kr.com/feed"
-  - name: AI科技评论
-    url: "https://www.aitechtalk.com/feed"
-  - name: 美联社 (AP News)
-    url: "https://apnews.com/apf-services/v2/api/v1/rss"
-  - name: 彭博社 (Bloomberg)
-    url: "https://www.bloomberg.com/feed/podcast/etf-report.xml"
-  - name: 《财富》(Fortune)
-    url: "https://feeds.fortune.com/fortune500"
+    url: "https://www.36kr.com/p/feed"
+  - name: 虎嗅网
+    url: "https://www.huxiu.com/rss.xml"
+

@@ -37,6 +37,23 @@ def entry_published_dt(entry):
     return None
 
 
+def is_ai_related(text):
+    """检查文本是否与 AI 相关"""
+    if not text:
+        return True  # 无文本时不过滤
+    text_lower = text.lower()
+    ai_keywords = [
+        "ai", "artificial intelligence", "人工智能", "机器学习",
+        "deep learning", "深度学习", "neural", "神经网络",
+        "llm", "大模型", "gpt", "claude", "gemini",
+        "transformer", "注意力机制", "生成式", "generative",
+        "算法", "algorithm", "模型", "model", "训练",
+        "推理", "inference", "微调", "fine-tune", "prompt",
+        "embedding", "向量", "nlp", "自然语言", "vision", "视觉"
+    ]
+    return any(keyword in text_lower for keyword in ai_keywords)
+
+
 def fetch_summary(url, fallback=""):
     try:
         resp = requests.get(url, timeout=8, headers={"User-Agent": "Mozilla/5.0"})
@@ -121,6 +138,11 @@ def main():
             seen.add(link)
             title = entry.get("title", "(no title)")
             fallback = entry.get("summary", "")
+            
+            # AI 关键字过滤：标题或摘要必须包含 AI 相关词汇
+            if not (is_ai_related(title) or is_ai_related(fallback)):
+                continue
+            
             summary = fetch_summary(link, fallback=fallback)
             # 简短化 summary 为一两句
             if summary and len(summary) > 300:
