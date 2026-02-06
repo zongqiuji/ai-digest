@@ -1,0 +1,14 @@
+# 将常用媒体的 RSS/Feed 列表放在这里。若找不到某源的 RSS，请在浏览器中搜索“站点名 RSS”并替换 url 字段。
+feeds:
+  - name: 机器之心
+    url: "https://www.jiqizhixin.com/feed"
+  - name: 钛媒体
+    url: "https://www.tmtpost.com/feed/"
+  - name: 晚点 LatePost
+    url: "https://www.latepost.com/api/feed/latest.xml"
+  - name: 新智元
+    url: "https://www.ainav.cn/feed"
+  - name: MIT Technology Review
+    url: "https://www.technologyreview.com/feed/"
+  - name: Wired
+    url: "https://www.wired.com/feed/rss"

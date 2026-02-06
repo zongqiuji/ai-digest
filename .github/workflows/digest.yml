@@ -1,0 +1,35 @@
+name: AI Daily Digest
+
+on:
+  schedule:
+    # 每日 13:00 UTC -> 21:00 CST（中国时区）
+    - cron: '0 13 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run aggregator
+        run: python src/aggregator.py
+
+      - name: Send email (if secrets configured)
+        if: ${{ secrets.EMAIL_USER && secrets.EMAIL_PASS && secrets.RECIPIENT }}
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          RECIPIENT: ${{ secrets.RECIPIENT }}
+        run: python src/email_sender.py

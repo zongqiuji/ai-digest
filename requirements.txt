@@ -1,0 +1,6 @@
+feedparser
+PyYAML
+requests
+beautifulsoup4
+markdown
+python-dotenv
