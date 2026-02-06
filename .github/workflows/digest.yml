@@ -27,7 +27,7 @@ jobs:
         run: python src/aggregator.py
 
       - name: Send email (if secrets configured)
-        if: ${{ secrets.EMAIL_USER && secrets.EMAIL_PASS && secrets.RECIPIENT }}
+        if: ${{ env.EMAIL_USER != '' && env.EMAIL_PASS != '' && env.RECIPIENT != '' }}
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
