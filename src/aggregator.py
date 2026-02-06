@@ -59,9 +59,31 @@ def fetch_summary(url, fallback=""):
 def build_digest(items):
     today = datetime.now().strftime("%Y%m%d")
     path = OUT_DIR / f"digest-{today}.md"
+    
+    # 统计信息
+    total_count = len(items)
+    source_counts = {}
+    for item in items:
+        source = item['source']
+        source_counts[source] = source_counts.get(source, 0) + 1
+    unique_sources = len(source_counts)
+    
     with open(path, "w", encoding="utf-8") as f:
-        f.write(f"# AI 每日快讯 — {datetime.now().strftime('%Y-%m-%d')}")
-        f.write("\n\n本摘要为近 24 小时内聚合内容，按来源排序。\n\n")
+        f.write(f"# AI 每日快讯 — {datetime.now().strftime('%Y-%m-%d')}\n\n")
+        
+        # 添加总结性统计
+        f.write("## 📊 今日概览\n\n")
+        f.write(f"- **📰 总计文章数**：{total_count} 篇\n")
+        f.write(f"- **🔗 信息源数**：{unique_sources} 个\n")
+        f.write("\n### 各源文章数\n\n")
+        for source in sorted(source_counts.keys()):
+            count = source_counts[source]
+            f.write(f"- {source}：{count} 篇\n")
+        
+        f.write("\n---\n\n")
+        f.write("## 📰 详细内容\n\n")
+        f.write("本摘要为近 24 小时内聚合内容，按来源排序。\n\n")
+        
         for it in items:
             f.write(f"- **{it['source']}**: [{it['title']}]({it['link']})\n")
             if it.get("summary"):
